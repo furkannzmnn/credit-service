@@ -1,9 +1,8 @@
 package org.colendi.domain.installment;
 
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.colendi.domain.DomainComponent;
+import org.colendi.domain.config.usecase.DomainComponent;
 import org.colendi.domain.config.usecase.ObservableUseCasePublisher;
 import org.colendi.domain.config.usecase.VoidUseCaseHandler;
 import org.colendi.domain.installment.model.Installment;

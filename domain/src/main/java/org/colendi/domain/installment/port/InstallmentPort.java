@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InstallmentPort {
 
-    Installment lookUp(Long installmentId);
+    Installment retrieve(Long installmentId);
 
     void update(Installment installment);
 

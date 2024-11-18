@@ -2,7 +2,7 @@ package org.colendi.domain.installment.usecase;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.colendi.domain.UseCase;
+import org.colendi.domain.config.usecase.UseCase;
 
 import java.math.BigDecimal;
 
