@@ -7,6 +7,7 @@ import org.colendi.domain.installment.model.Installment;
 import org.colendi.domain.installment.model.InstallmentStatus;
 import org.colendi.domain.installment.port.InstallmentPort;
 import org.colendi.infra.installment.jpa.InstallmentRepository;
+import org.colendi.infra.installment.jpa.entity.InstallmentEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -22,16 +23,29 @@ public class InstallmentJpaAdapter implements InstallmentPort {
 
     @Override
     public Installment retrieve(Long installmentId) {
-        return installmentRepository.findById(installmentId).orElseThrow(RuntimeException::new);
+        return installmentRepository.findById(installmentId).orElseThrow(RuntimeException::new)
+                .toInstallment();
     }
 
     @Override
     public void update(Installment installment) {
-        installmentRepository.save(installment);
+        installmentRepository.save(InstallmentEntity.builder()
+                .id(installment.getId())
+                .creditId(installment.getCreditId())
+                .dueDate(installment.getDueDate())
+                .amount(installment.getAmount())
+                .status(installment.getStatus())
+                .paidAmount(installment.getPaidAmount())
+                .paymentDate(installment.getPaymentDate())
+                .lateFee(installment.getLateFee())
+                .build());
     }
 
     @Override
     public List<Installment> retrieveOverdueInstallments() {
-        return installmentRepository.findByDueDateBeforeAndStatus(LocalDate.now(), InstallmentStatus.PENDING);
+        return installmentRepository.findByDueDateBeforeAndStatus(LocalDate.now(), InstallmentStatus.PENDING)
+                .stream()
+                .map(InstallmentEntity::toInstallment)
+                .toList();
     }
 }

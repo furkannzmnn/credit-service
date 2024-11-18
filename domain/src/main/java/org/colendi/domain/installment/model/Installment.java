@@ -34,5 +34,4 @@ public class Installment {
             this.status = InstallmentStatus.PARTIALLY_PAID;
         }
     }
-
 }

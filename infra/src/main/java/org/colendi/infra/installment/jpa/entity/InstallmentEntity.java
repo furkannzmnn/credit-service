@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.colendi.domain.installment.model.Installment;
 import org.colendi.domain.installment.model.InstallmentStatus;
 
 import java.math.BigDecimal;
@@ -31,4 +32,16 @@ public class InstallmentEntity  {
     private BigDecimal lateFee;
 
 
+    public Installment toInstallment() {
+        return Installment.builder()
+                .id(id)
+                .creditId(creditId)
+                .dueDate(dueDate)
+                .amount(amount)
+                .status(status)
+                .paidAmount(paidAmount)
+                .paymentDate(paymentDate)
+                .lateFee(lateFee)
+                .build();
+    }
 }
