@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static org.colendi.domain.installment.model.InstallmentStatus.OVERDUE;
+
 @Component
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -29,6 +31,7 @@ public class LateFeeScheduler {
             long daysOverdue = ChronoUnit.DAYS.between(installment.getDueDate(), LocalDate.now());
             BigDecimal lateFee = calculateFee(installment.getAmount(), daysOverdue);
             installment.setLateFee(lateFee);
+            installment.setStatus(OVERDUE);
             installmentPort.update(installment);
         }
     }
