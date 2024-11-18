@@ -1,8 +1,6 @@
 package org.colendi.domain.config.usecase;
 
 
-import org.colendi.domain.UseCase;
-
 public class ObservableUseCasePublisher extends BeanAwareUseCasePublisher {
 
     public <R, T extends UseCase> void register(Class<T> useCaseClass, UseCaseHandler<R, T> useCaseHandler) {

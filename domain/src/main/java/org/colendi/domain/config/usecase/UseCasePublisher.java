@@ -1,8 +1,6 @@
 package org.colendi.domain.config.usecase;
 
 
-import org.colendi.domain.UseCase;
-
 public interface UseCasePublisher {
 
     <R, T extends UseCase> R publish(Class<R> returnClass, T useCase);

@@ -1,8 +1,6 @@
 package org.colendi.domain.config.usecase;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import org.colendi.domain.UseCase;
 
 import java.util.HashMap;
 import java.util.Map;

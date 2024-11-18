@@ -1,7 +1,5 @@
 package org.colendi.domain.config.usecase;
 
-import org.colendi.domain.DomainComponent;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletableFuture;
 

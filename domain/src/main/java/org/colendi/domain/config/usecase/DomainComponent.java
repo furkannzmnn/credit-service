@@ -1,4 +1,4 @@
-package org.colendi.domain;
+package org.colendi.domain.config.usecase;
 
 
 import java.lang.annotation.ElementType;
