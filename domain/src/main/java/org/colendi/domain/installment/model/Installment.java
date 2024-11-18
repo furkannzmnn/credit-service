@@ -2,13 +2,16 @@ package org.colendi.domain.installment.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.colendi.domain.config.usecase.AggregateRoot;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class Installment {
+public class Installment extends AggregateRoot {
     private Long id;
     private Long creditId;
     private LocalDate dueDate;

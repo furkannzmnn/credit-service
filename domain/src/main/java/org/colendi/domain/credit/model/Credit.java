@@ -2,6 +2,8 @@ package org.colendi.domain.credit.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.colendi.domain.config.usecase.AggregateRoot;
 import org.colendi.domain.installment.model.Installment;
 import org.colendi.domain.installment.model.InstallmentStatus;
 
@@ -10,9 +12,10 @@ import java.math.RoundingMode;
 import java.time.*;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class Credit {
+public class Credit extends AggregateRoot {
     private Long id;
     private Long userId;
     private BigDecimal amount;
