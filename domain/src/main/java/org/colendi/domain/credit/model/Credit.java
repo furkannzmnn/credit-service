@@ -54,6 +54,8 @@ public class Credit extends AggregateRoot {
                 .dueDate(dueDate.toLocalDate())
                 .amount(amount)
                 .status(InstallmentStatus.PENDING)
+                .paidAmount(BigDecimal.ZERO)
+                .paymentDate(LocalDate.now())
                 .build();
     }
 
