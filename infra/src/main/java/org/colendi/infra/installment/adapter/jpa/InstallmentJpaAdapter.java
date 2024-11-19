@@ -3,6 +3,8 @@ package org.colendi.infra.installment.adapter.jpa;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.colendi.domain.config.exception.DomainException;
+import org.colendi.domain.config.exception.ErrorCode;
 import org.colendi.domain.installment.model.Installment;
 import org.colendi.domain.installment.model.InstallmentStatus;
 import org.colendi.domain.installment.port.InstallmentPort;
@@ -23,7 +25,9 @@ public class InstallmentJpaAdapter implements InstallmentPort {
 
     @Override
     public Installment retrieve(Long installmentId) {
-        return installmentRepository.findById(installmentId).orElseThrow(RuntimeException::new)
+        return installmentRepository.findById(installmentId).orElseThrow(() -> DomainException.builder()
+                        .messageKey(ErrorCode.INSTALLMENT_NOT_FOUND.getMessageKey())
+                        .build())
                 .toInstallment();
     }
 

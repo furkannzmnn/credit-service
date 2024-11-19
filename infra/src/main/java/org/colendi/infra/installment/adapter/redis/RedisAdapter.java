@@ -2,6 +2,8 @@ package org.colendi.infra.installment.adapter.redis;
 
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.colendi.domain.config.exception.DomainException;
+import org.colendi.domain.config.exception.ErrorCode;
 import org.colendi.domain.installment.port.CachePort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -24,7 +26,10 @@ public class RedisAdapter implements CachePort {
         boolean success = Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(key, lockValue, EXPIRATION_TIME, TimeUnit.SECONDS));
 
         if (!success) {
-            throw new RuntimeException("Lock could not be acquired");
+            throw DomainException.builder()
+                    .messageKey(ErrorCode.SYSTEM_BUSY.getMessageKey())
+                    .build();
+
         }
     }
 
