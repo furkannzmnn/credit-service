@@ -1,6 +1,5 @@
 package org.colendi.infra.credit.adapter.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.colendi.infra.BaseIntegrationTest;
 import org.colendi.infra.credit.adapter.rest.model.CreateCreditRequest;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
