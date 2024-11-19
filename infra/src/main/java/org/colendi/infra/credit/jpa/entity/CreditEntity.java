@@ -38,6 +38,7 @@ public class CreditEntity {
                 .installmentCount(credit.getInstallmentCount())
                 .status(credit.getStatus())
                 .createdAt(credit.getCreatedAt())
+                .installments(credit.getInstallments().stream().map(InstallmentEntity::fromModel).toList())
                 .build();
     }
 

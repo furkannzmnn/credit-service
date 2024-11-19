@@ -16,11 +16,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 @DomainComponent
-@RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CreateCreditUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<CreateCreditResponse, CreateCreditUseCase> {
 
     CreditPort creditPort;
+
+    public CreateCreditUseCaseHandler(CreditPort creditPort) {
+        this.creditPort = creditPort;
+        register(CreateCreditUseCase.class, this);
+    }
 
     public CreateCreditResponse handle(CreateCreditUseCase createCreditUseCase) {
         Credit credit = Credit.builder()

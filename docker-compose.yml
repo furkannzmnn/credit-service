@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  backend:
+    container_name: credit-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - postgres
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        window: 60s
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres?serverTimezone=UTC&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_URL: redis://redis:6379
+
+
+  redis:
+    image: redis
+    container_name: credit-redis
+    ports:
+      - "6379:6379"
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        window: 60s
+
+  postgres:
+    image: postgres
+    container_name: credit-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root

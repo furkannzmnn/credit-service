@@ -14,11 +14,15 @@ import org.colendi.domain.credit.usecase.FilterCreditUseCase;
 import java.util.List;
 
 @DomainComponent
-@RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class FilterCreditUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<List<ListCreditResponse>, FilterCreditUseCase> {
 
     CreditPort creditPort;
+
+    public FilterCreditUseCaseHandler(CreditPort creditPort) {
+        this.creditPort = creditPort;
+        register(FilterCreditUseCase.class, this);
+    }
 
     @Override
     public List<ListCreditResponse> handle(FilterCreditUseCase useCase) {

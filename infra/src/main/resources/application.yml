@@ -1,3 +1,20 @@
 redis:
   lock:
     expirationTime: 5
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=UTC&useSSL=false&createDatabaseIfNotExist=true
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+  data:
+    redis:
+      url: ${SPRING_REDIS_HOST:redis}
