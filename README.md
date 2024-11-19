@@ -9,6 +9,8 @@
 
 ## Architecture
 - **Hexagonal Architecture**: Ensures the application is modular, extensible, and maintainable by organizing components into independent layers.
+![image](https://github.com/user-attachments/assets/031788e7-6e51-4a54-a42b-8c0f6be9d13c)
+
 
 ## Future Enhancements
 - **Rate Limiter**: Can be implemented to control the system load by limiting the number of requests.
