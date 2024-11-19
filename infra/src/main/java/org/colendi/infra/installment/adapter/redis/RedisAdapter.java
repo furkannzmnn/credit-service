@@ -23,18 +23,25 @@ public class RedisAdapter implements CachePort {
     @Override
     public void lock(String key) {
         String lockValue = "LOCKED";
-        boolean success = Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(key, lockValue, EXPIRATION_TIME, TimeUnit.SECONDS));
+        boolean success = Boolean.TRUE.equals(
+                redisTemplate.opsForValue().setIfAbsent(key, lockValue, EXPIRATION_TIME, TimeUnit.SECONDS)
+        );
 
         if (!success) {
             throw DomainException.builder()
                     .messageKey(ErrorCode.SYSTEM_BUSY.getMessageKey())
                     .build();
-
         }
     }
 
     @Override
     public void unlock(String key) {
         redisTemplate.delete(key);
+    }
+
+    @Override
+    public boolean isLocked(String key) {
+        String value = redisTemplate.opsForValue().get(key);
+        return "LOCKED".equals(value);
     }
 }
