@@ -27,11 +27,11 @@ public class CreditSpecification {
 
     private static Specification<CreditEntity> createdAfter(LocalDate startDate) {
         return (root, query, cb) ->
-                startDate != null ? cb.greaterThanOrEqualTo(root.get("createdDate"), startDate) : null;
+                startDate != null ? cb.greaterThanOrEqualTo(root.get("createdAt"), startDate) : null;
     }
 
     private static Specification<CreditEntity> createdBefore(LocalDate endDate) {
         return (root, query, cb) ->
-                endDate != null ? cb.lessThanOrEqualTo(root.get("createdDate"), endDate) : null;
+                endDate != null ? cb.lessThanOrEqualTo(root.get("createdAt"), endDate) : null;
     }
 }
