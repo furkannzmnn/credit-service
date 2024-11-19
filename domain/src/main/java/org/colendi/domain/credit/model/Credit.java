@@ -31,7 +31,7 @@ public class Credit extends AggregateRoot {
         );
 
         for (int i = 0; i < this.installmentCount; i++) {
-            dueDate = adjustDueDate(dueDate.plusDays(30));
+            dueDate = getNextBusinessDay(dueDate.plusDays(30));
             Installment installment = Installment.builder()
                     .dueDate(dueDate.toLocalDate())
                     .amount(installmentAmount)
@@ -41,7 +41,7 @@ public class Credit extends AggregateRoot {
         }
     }
 
-    private LocalDateTime adjustDueDate(LocalDateTime date) {
+    private LocalDateTime getNextBusinessDay(LocalDateTime date) {
         if (date.getDayOfWeek() == DayOfWeek.SATURDAY) {
             return date.plusDays(2);
         } else if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {

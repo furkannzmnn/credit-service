@@ -1,7 +1,9 @@
 package org.colendi.domain.installment.port;
 
 import org.colendi.domain.installment.model.Installment;
+import org.colendi.domain.installment.model.InstallmentStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface InstallmentPort {
@@ -10,6 +12,6 @@ public interface InstallmentPort {
 
     void update(Installment installment);
 
-    List<Installment> retrieveOverdueInstallments();
+    List<Installment> retrieveOverdueInstallments(LocalDate time, InstallmentStatus status);
 
 }

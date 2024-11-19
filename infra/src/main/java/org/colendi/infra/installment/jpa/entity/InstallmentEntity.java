@@ -44,4 +44,17 @@ public class InstallmentEntity  {
                 .lateFee(lateFee)
                 .build();
     }
+
+    public static InstallmentEntity fromModel(Installment installment) {
+        return InstallmentEntity.builder()
+                .id(installment.getId())
+                .creditId(installment.getCreditId())
+                .dueDate(installment.getDueDate())
+                .amount(installment.getAmount())
+                .status(installment.getStatus())
+                .paidAmount(installment.getPaidAmount())
+                .paymentDate(installment.getPaymentDate())
+                .lateFee(installment.getLateFee())
+                .build();
+    }
 }

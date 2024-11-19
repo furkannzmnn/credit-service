@@ -33,21 +33,12 @@ public class InstallmentJpaAdapter implements InstallmentPort {
 
     @Override
     public void update(Installment installment) {
-        installmentRepository.save(InstallmentEntity.builder()
-                .id(installment.getId())
-                .creditId(installment.getCreditId())
-                .dueDate(installment.getDueDate())
-                .amount(installment.getAmount())
-                .status(installment.getStatus())
-                .paidAmount(installment.getPaidAmount())
-                .paymentDate(installment.getPaymentDate())
-                .lateFee(installment.getLateFee())
-                .build());
+        installmentRepository.save(InstallmentEntity.fromModel(installment));
     }
 
     @Override
-    public List<Installment> retrieveOverdueInstallments() {
-        return installmentRepository.findByDueDateBeforeAndStatus(LocalDate.now(), InstallmentStatus.PENDING)
+    public List<Installment> retrieveOverdueInstallments(LocalDate time, InstallmentStatus status) {
+        return installmentRepository.findByDueDateBeforeAndStatus(time, status)
                 .stream()
                 .map(InstallmentEntity::toModel)
                 .toList();
