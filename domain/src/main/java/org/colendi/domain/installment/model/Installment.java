@@ -3,6 +3,8 @@ package org.colendi.domain.installment.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.colendi.domain.config.exception.DomainException;
+import org.colendi.domain.config.exception.ErrorCode;
 import org.colendi.domain.config.usecase.AggregateRoot;
 
 import java.math.BigDecimal;
@@ -21,19 +23,20 @@ public class Installment extends AggregateRoot {
     private InstallmentStatus status;
     private BigDecimal paidAmount;
     private LocalDate paymentDate;
-    private BigDecimal lateFee;// Gecikme ücreti
+    private BigDecimal lateFee;
 
     public void pay(BigDecimal amount) {
-        if (this.status == InstallmentStatus.PAID) {
-            throw new IllegalStateException("Installment is already fully paid.");
+        if (isAlreadyPaid()) {
+            throw DomainException.builder()
+                    .messageKey(ErrorCode.INSTALLMENT_ALREADY_PAID.getMessageKey())
+                    .build();
         }
 
         this.paidAmount = this.paidAmount.add(amount);
 
-        // 3. Taksitin tamamen ödenip ödenmediğini kontrol ediyrum burda
         if (this.paidAmount.compareTo(this.amount) >= 0) {
             this.status = InstallmentStatus.PAID;
-            this.paidAmount = this.amount; // Ödenen miktarı taksit tutarına eşitle
+            this.paidAmount = this.amount;
             this.paymentDate = LocalDate.now();
         } else {
             this.status = InstallmentStatus.PARTIALLY_PAID;
@@ -56,5 +59,9 @@ public class Installment extends AggregateRoot {
     public void markOverdue(BigDecimal lateFee) {
         this.lateFee = lateFee;
         this.status = InstallmentStatus.OVERDUE;
+    }
+
+    private boolean isAlreadyPaid() {
+        return this.status == InstallmentStatus.PAID;
     }
 }
