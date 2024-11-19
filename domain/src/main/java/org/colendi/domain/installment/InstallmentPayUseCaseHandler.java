@@ -2,8 +2,7 @@ package org.colendi.domain.installment;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.colendi.domain.config.exception.DomainException;
-import org.colendi.domain.config.exception.ErrorCode;
+import lombok.extern.slf4j.Slf4j;
 import org.colendi.domain.config.usecase.DomainComponent;
 import org.colendi.domain.config.usecase.ObservableUseCasePublisher;
 import org.colendi.domain.config.usecase.VoidUseCaseHandler;
@@ -15,6 +14,7 @@ import org.colendi.domain.installment.usecase.InstallmentPayUseCase;
 import java.math.BigDecimal;
 
 @DomainComponent
+@Slf4j
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class InstallmentPayUseCaseHandler extends ObservableUseCasePublisher implements VoidUseCaseHandler<InstallmentPayUseCase> {
 
@@ -31,9 +31,8 @@ public class InstallmentPayUseCaseHandler extends ObservableUseCasePublisher imp
         String installmentId = installmentPayUseCase.installmentId().toString();
 
         if (cachePort.isLocked(installmentId)) {
-            throw DomainException.builder()
-                    .messageKey(ErrorCode.SYSTEM_BUSY.getMessageKey())
-                    .build();
+            log.warn("Installment is locked. installmentId: {}", installmentId);
+            return;
         }
 
         cachePort.lock(installmentId);

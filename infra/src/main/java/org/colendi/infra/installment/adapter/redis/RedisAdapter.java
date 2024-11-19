@@ -24,7 +24,7 @@ public class RedisAdapter implements CachePort {
     public void lock(String key) {
         String lockValue = "LOCKED";
         boolean success = Boolean.TRUE.equals(
-                redisTemplate.opsForValue().setIfAbsent(key, lockValue, EXPIRATION_TIME, TimeUnit.SECONDS)
+                redisTemplate.opsForValue().setIfAbsent(generateKey(key), lockValue, EXPIRATION_TIME, TimeUnit.SECONDS)
         );
 
         if (!success) {
@@ -41,7 +41,10 @@ public class RedisAdapter implements CachePort {
 
     @Override
     public boolean isLocked(String key) {
-        String value = redisTemplate.opsForValue().get(key);
-        return "LOCKED".equals(value);
+        return Boolean.TRUE.equals(redisTemplate.hasKey(generateKey(key)));
+    }
+
+    private String generateKey(String key) {
+        return "LOCK:" + key;
     }
 }
