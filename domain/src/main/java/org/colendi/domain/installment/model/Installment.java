@@ -52,7 +52,7 @@ public class Installment extends AggregateRoot {
                 .divide(BigDecimal.valueOf(360), RoundingMode.HALF_UP);
     }
 
-    private long overdueDays() {
+    public long overdueDays() {
         return ChronoUnit.DAYS.between(getDueDate(), LocalDate.now());
     }
 
