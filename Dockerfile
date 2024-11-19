@@ -16,7 +16,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17 AS runtime
 WORKDIR /app
 
-COPY --from=build /app/infra/target/infra-0.0.1-SNAPSHOT.jar colendi-credit-service.jar
+COPY --from=build /app/infra/target/infra-0.0.1-SNAPSHOT.jar credit-service.jar
 
-ENTRYPOINT ["java", "-jar", "colendi-credit-service.jar"]
+ENTRYPOINT ["java", "-jar", "credit-service.jar"]
 
