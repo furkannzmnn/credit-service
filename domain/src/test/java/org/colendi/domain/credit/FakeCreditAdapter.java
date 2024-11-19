@@ -16,4 +16,11 @@ public class FakeCreditAdapter implements CreditPort {
         credits.add(credit);
         return credit;
     }
+
+    @Override
+    public List<Credit> retrieveByUserId(Long userId) {
+        return credits.stream()
+                .filter(credit -> credit.getUserId().equals(userId))
+                .toList();
+    }
 }
