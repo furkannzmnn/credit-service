@@ -26,16 +26,15 @@ public class InstallmentPayUseCaseHandler extends ObservableUseCasePublisher imp
     }
 
     public void handle(InstallmentPayUseCase installmentPayUseCase) {
-        cachePort.lock(installmentPayUseCase.getInstallmentId().toString());
+        String installmentId = installmentPayUseCase.installmentId().toString();
+        cachePort.lock(installmentId);
         try {
-            Installment installment = installmentPort.retrieve(installmentPayUseCase.getInstallmentId());
-            BigDecimal amountToPay = installmentPayUseCase.getAmount();
+            Installment installment = installmentPort.retrieve(installmentPayUseCase.installmentId());
+            BigDecimal amountToPay = installmentPayUseCase.amount();
             installment.pay(amountToPay);
             installmentPort.update(installment);
         } finally {
-            cachePort.unlock(installmentPayUseCase.getInstallmentId().toString());
+            cachePort.unlock(installmentId);
         }
     }
-
-
 }

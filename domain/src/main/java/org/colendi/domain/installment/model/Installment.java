@@ -6,7 +6,9 @@ import lombok.EqualsAndHashCode;
 import org.colendi.domain.config.usecase.AggregateRoot;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -36,5 +38,23 @@ public class Installment extends AggregateRoot {
         } else {
             this.status = InstallmentStatus.PARTIALLY_PAID;
         }
+    }
+
+
+    public BigDecimal calculateFee(BigDecimal amount) {
+        BigDecimal dailyRate = BigDecimal.valueOf(0.05);
+        return amount
+                .multiply(dailyRate)
+                .multiply(BigDecimal.valueOf(overdueDays()))
+                .divide(BigDecimal.valueOf(360), RoundingMode.HALF_UP);
+    }
+
+    private long overdueDays() {
+        return ChronoUnit.DAYS.between(getDueDate(), LocalDate.now());
+    }
+
+    public void markOverdue(BigDecimal lateFee) {
+        this.lateFee = lateFee;
+        this.status = InstallmentStatus.OVERDUE;
     }
 }

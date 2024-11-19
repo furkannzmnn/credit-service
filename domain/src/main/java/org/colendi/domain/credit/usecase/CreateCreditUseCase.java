@@ -1,15 +1,14 @@
 package org.colendi.domain.credit.usecase;
 
 import lombok.Builder;
-import lombok.Getter;
 import org.colendi.domain.config.usecase.UseCase;
 
 import java.math.BigDecimal;
 
-@Getter
 @Builder
-public class CreateCreditUseCase implements UseCase {
-    private Long userId;
-    private BigDecimal amount;
-    private Integer installmentCount;
+public record CreateCreditUseCase(
+        Long userId,
+        BigDecimal amount,
+        Integer installmentCount
+) implements UseCase {
 }

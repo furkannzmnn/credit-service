@@ -22,9 +22,9 @@ public class CreateCreditUseCaseHandler extends ObservableUseCasePublisher imple
 
     public void handle(CreateCreditUseCase createCreditUseCase) {
         Credit credit = Credit.builder()
-                .userId(createCreditUseCase.getUserId())
-                .amount(createCreditUseCase.getAmount())
-                .installmentCount(createCreditUseCase.getInstallmentCount())
+                .userId(createCreditUseCase.userId())
+                .amount(createCreditUseCase.amount())
+                .installmentCount(createCreditUseCase.installmentCount())
                 .createdAt(LocalDate.now())
                 .status(CreditStatus.PENDING)
                 .build();

@@ -9,12 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-
-import static org.colendi.domain.installment.model.InstallmentStatus.OVERDUE;
 
 @Component
 @RequiredArgsConstructor
@@ -28,19 +23,9 @@ public class LateFeeScheduler {
     public void calculateLateFees() {
         List<Installment> overdueInstallments = installmentPort.retrieveOverdueInstallments();
         for (Installment installment : overdueInstallments) {
-            long daysOverdue = ChronoUnit.DAYS.between(installment.getDueDate(), LocalDate.now());
-            BigDecimal lateFee = calculateFee(installment.getAmount(), daysOverdue);
-            installment.setLateFee(lateFee);
-            installment.setStatus(OVERDUE);
+            BigDecimal lateFee = installment.calculateFee(installment.getAmount());
+            installment.markOverdue(lateFee);
             installmentPort.update(installment);
         }
-    }
-
-    private BigDecimal calculateFee(BigDecimal amount, long daysOverdue) {
-        BigDecimal dailyRate = BigDecimal.valueOf(0.05);
-        return amount
-                .multiply(dailyRate)
-                .multiply(BigDecimal.valueOf(daysOverdue))
-                .divide(BigDecimal.valueOf(360), RoundingMode.HALF_UP);
     }
 }

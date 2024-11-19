@@ -1,15 +1,13 @@
 package org.colendi.domain.installment.usecase;
 
 import lombok.Builder;
-import lombok.Getter;
 import org.colendi.domain.config.usecase.UseCase;
 
 import java.math.BigDecimal;
 
 @Builder
-@Getter
-public class InstallmentPayUseCase implements UseCase {
-    private Long installmentId;
-    private BigDecimal amount;
-    private Long userId;
-}
+public record InstallmentPayUseCase(
+        Long installmentId,
+        BigDecimal amount,
+        Long userId
+) implements UseCase { }
