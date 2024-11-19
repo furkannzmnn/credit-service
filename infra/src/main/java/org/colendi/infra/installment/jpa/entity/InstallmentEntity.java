@@ -32,7 +32,7 @@ public class InstallmentEntity  {
     private BigDecimal lateFee;
 
 
-    public Installment toInstallment() {
+    public Installment toModel() {
         return Installment.builder()
                 .id(id)
                 .creditId(creditId)

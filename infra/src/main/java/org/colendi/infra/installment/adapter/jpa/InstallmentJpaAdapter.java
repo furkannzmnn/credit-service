@@ -28,7 +28,7 @@ public class InstallmentJpaAdapter implements InstallmentPort {
         return installmentRepository.findById(installmentId).orElseThrow(() -> DomainException.builder()
                         .messageKey(ErrorCode.INSTALLMENT_NOT_FOUND.getMessageKey())
                         .build())
-                .toInstallment();
+                .toModel();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class InstallmentJpaAdapter implements InstallmentPort {
     public List<Installment> retrieveOverdueInstallments() {
         return installmentRepository.findByDueDateBeforeAndStatus(LocalDate.now(), InstallmentStatus.PENDING)
                 .stream()
-                .map(InstallmentEntity::toInstallment)
+                .map(InstallmentEntity::toModel)
                 .toList();
     }
 }
