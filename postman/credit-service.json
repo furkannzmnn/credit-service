@@ -1,0 +1,370 @@
+{
+  "info": {
+    "_postman_id": "a8b298d6-ebf6-45fb-9f8d-c901ca4a7a41",
+    "name": "Credit Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17093322"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "installment",
+              "item": [
+                {
+                  "name": "pay",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"installmentId\": \"<long>\",\n  \"userId\": \"<long>\",\n  \"amount\": \"<number>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/installment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "installment"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"installmentId\": \"<long>\",\n  \"userId\": \"<long>\",\n  \"amount\": \"<number>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/installment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "installment"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "credit",
+              "item": [
+                {
+                  "name": "filter",
+                  "item": [
+                    {
+                      "name": "filter Credit",
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "userId",
+                            "value": "<long>",
+                            "description": "(Required) "
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/credit/filter?status=OVERDUE&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "credit",
+                            "filter"
+                          ],
+                          "query": [
+                            {
+                              "key": "status",
+                              "value": "OVERDUE"
+                            },
+                            {
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "userId",
+                                "value": "<long>",
+                                "description": "(Required) "
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/credit/filter?status=OVERDUE&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "credit",
+                                "filter"
+                              ],
+                              "query": [
+                                {
+                                  "key": "status",
+                                  "value": "OVERDUE"
+                                },
+                                {
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "*/*"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "list Credit",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "userId",
+                        "value": "<long>",
+                        "description": "(Required) "
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/credit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "credit"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "userId",
+                            "value": "<long>",
+                            "description": "(Required) "
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/credit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "credit"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "[\n  {\n    \"creditId\": \"<long>\",\n    \"installmentDetails\": [\n      {\n        \"id\": \"<long>\",\n        \"amount\": \"<number>\",\n        \"dueDate\": \"<string>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"amount\": \"<number>\",\n        \"dueDate\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"creditId\": \"<long>\",\n    \"installmentDetails\": [\n      {\n        \"id\": \"<long>\",\n        \"amount\": \"<number>\",\n        \"dueDate\": \"<string>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"amount\": \"<number>\",\n        \"dueDate\": \"<string>\"\n      }\n    ]\n  }\n]"
+                    }
+                  ]
+                },
+                {
+                  "name": "create Credit",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"userId\": \"<long>\",\n  \"amount\": \"<number>\",\n  \"installmentCount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/credit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "credit"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"userId\": \"<long>\",\n  \"amount\": \"<number>\",\n  \"installmentCount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/credit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "credit"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"creditId\": \"<long>\",\n  \"installments\": [\n    {\n      \"id\": \"<long>\",\n      \"amount\": \"<number>\",\n      \"dueDate\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"amount\": \"<number>\",\n      \"dueDate\": \"<string>\"\n    }\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

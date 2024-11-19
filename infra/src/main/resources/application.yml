@@ -12,9 +12,9 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=UTC&useSSL=false&createDatabaseIfNotExist=true
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
 
   data:
     redis:
-      url: ${SPRING_REDIS_HOST:redis}
+      url: ${SPRING_REDIS_HOST:redis://localhost:6379}
