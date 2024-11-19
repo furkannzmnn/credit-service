@@ -24,7 +24,8 @@ public class CreditEntity {
 
     private Long userId;
     private BigDecimal amount;
-    private int installmentCount;
+    private Integer installmentCount;
+    @Enumerated(EnumType.STRING)
     private CreditStatus status;
     private LocalDate createdAt;
 

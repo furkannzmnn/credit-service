@@ -1,9 +1,6 @@
 package org.colendi.infra.installment.jpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -26,6 +23,7 @@ public class InstallmentEntity  {
     private Long creditId;
     private LocalDate dueDate;
     private BigDecimal amount;
+    @Enumerated(EnumType.STRING)
     private InstallmentStatus status;
     private BigDecimal paidAmount;
     private LocalDate paymentDate;

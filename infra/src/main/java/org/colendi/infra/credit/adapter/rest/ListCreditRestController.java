@@ -2,7 +2,6 @@ package org.colendi.infra.credit.adapter.rest;
 
 
 import org.colendi.domain.config.usecase.BeanAwareUseCasePublisher;
-import org.colendi.domain.credit.ListCreditUseCaseHandler;
 import org.colendi.domain.credit.model.query.ListCreditResponse;
 import org.colendi.domain.credit.usecase.ListCreditUseCase;
 import org.springframework.http.ResponseEntity;

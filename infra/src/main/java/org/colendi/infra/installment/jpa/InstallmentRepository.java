@@ -1,6 +1,5 @@
 package org.colendi.infra.installment.jpa;
 
-import org.colendi.domain.installment.model.Installment;
 import org.colendi.domain.installment.model.InstallmentStatus;
 import org.colendi.infra.installment.jpa.entity.InstallmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
