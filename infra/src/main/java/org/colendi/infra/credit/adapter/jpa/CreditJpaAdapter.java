@@ -3,6 +3,7 @@ package org.colendi.infra.credit.adapter.jpa;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.colendi.domain.credit.model.Credit;
+import org.colendi.domain.credit.model.command.SearchCredit;
 import org.colendi.domain.credit.port.CreditPort;
 import org.colendi.infra.credit.jpa.CreditRepository;
 import org.colendi.infra.credit.jpa.entity.CreditEntity;
@@ -27,6 +28,14 @@ public class CreditJpaAdapter implements CreditPort {
     @Override
     public List<Credit> retrieveByUserId(Long userId) {
         return creditRepository.findByUserId(userId)
+                .stream()
+                .map(CreditEntity::toModel)
+                .toList();
+    }
+
+    @Override
+    public List<Credit> searchCredits(SearchCredit searchCredit) {
+        return creditRepository.findAll(CreditSpecification.build(searchCredit))
                 .stream()
                 .map(CreditEntity::toModel)
                 .toList();
