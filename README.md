@@ -13,6 +13,10 @@
 
 ![Diagram](https://i.hizliresim.com/7kirj9d.png)
 
+![Uygulama Ekran Görüntüsü](https://i.hizliresim.com/7kirj9d.png)
+
+
+
 ![image](https://github.com/user-attachments/assets/031788e7-6e51-4a54-a42b-8c0f6be9d13c)
 
 
