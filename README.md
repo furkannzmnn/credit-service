@@ -9,6 +9,7 @@
 
 ## Architecture
 - **Hexagonal Architecture**: Ensures the application is modular, extensible, and maintainable by organizing components into independent layers.
+![Screenshot 2025-01-09 at 14.17.25.png](Screenshot%202025-01-09%20at%2014.17.25.png)
 ![image](https://github.com/user-attachments/assets/031788e7-6e51-4a54-a42b-8c0f6be9d13c)
 
 
