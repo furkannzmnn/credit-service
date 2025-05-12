@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Build Docker Image
+        run: |
+          sudo docker build  --no-cache -f Dockerfile -t backend .
+        shell: bash
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Deploy to Server
+        run: |
+          sudo bash -c 'cd /home/birgul/birgul-backend && docker compose up -d backend --force-recreate'
+        shell: bash
